@@ -68,4 +68,13 @@ const deleteUser = async (id) => {
     }
 }
 
-module.exports = { getAllUsers, getUser, createUser, updateUser, deleteUser };
+const findOne = async (email) => {
+    try {
+        const [rows] = await db.query('SELECT * FROM users WHERE email = ?', [email]);
+        return rows[0];
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+module.exports = { getAllUsers, getUser, createUser, updateUser, deleteUser, findOne };
